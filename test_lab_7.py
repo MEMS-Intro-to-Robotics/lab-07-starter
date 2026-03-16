@@ -11,6 +11,9 @@ import warnings
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp"}
 EXPECTED_PKG_PATTERNS = ["lab07", "crazyflie", "pid"]
 
+# Starter template text that indicates the student hasn't updated the file
+README_STARTER_FINGERPRINT = "Update this README with your name, NetID, and instructions"
+
 
 def _find_ros2_package():
     """Find the ROS 2 package directory under ros2_ws/src/."""
@@ -64,6 +67,15 @@ def test_readme_exists():
 
 def test_readme_not_empty():
     assert os.path.getsize("README.md") > 0, "README.md is empty"
+
+
+def test_readme_updated():
+    with open("README.md", "r", errors="replace") as f:
+        content = f.read()
+    assert README_STARTER_FINGERPRINT not in content, (
+        "README.md still contains the starter template text. "
+        "Please update it with your name, NetID, and instructions for running your code."
+    )
 
 
 def test_docs_directory_exists():
